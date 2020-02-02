@@ -1,4 +1,4 @@
-import { logN, log } from "./log";
+import { logN, log, logResult, logResultN } from "./log";
 
 interface BracketResult {
   resultCount: number;
@@ -7,7 +7,7 @@ interface BracketResult {
 
 const FindValidCombination = (count: number) => {
   var toRetrun = getBracketResults(count);
-  logN(toRetrun.results.length);
+  logResultN(toRetrun.results.length);
 };
 
 // Execute(myLog, ["1234", 5]);
@@ -30,8 +30,9 @@ const AddBracket = (
     result += b;
   }
 
+  log("AddBracket: " + b);
   if (closeCount === totalCount && openCount === totalCount) {
-    log(result);
+    logResult(result);
     toRetrun.resultCount++;
     toRetrun.results = [result, ...toRetrun.results];
   }
@@ -47,4 +48,8 @@ const AddBracket = (
 
 // FindValidCombination(2);
 
-export default FindValidCombination;
+const main = () => {
+  FindValidCombination(2);
+};
+
+export default main;

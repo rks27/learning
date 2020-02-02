@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Button, Grid, Segment } from "@fluentui/react";
+import { Button, Grid, Segment, Label, Flex } from "@fluentui/react";
 import logLines from "./examples/log";
-import FindValidCombination from "./examples/bracket";
+import { logResults } from "./examples/log";
+// import main from "./examples/bracket";
+import main from "./examples/adhoc";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-FindValidCombination(2);
+main();
 
 const App: React.FC<any> = (prop: any) => {
   const [lines, refreshLines] = useState({
     output: logLines()
   });
 
+  const [results, refreshResults] = useState({
+    output: logResults()
+  });
   return (
     <Router>
       <Grid columns="repeat(4, 1fr)" rows="50px 800px 50px">
@@ -23,18 +28,7 @@ const App: React.FC<any> = (prop: any) => {
             gridColumn: "span 4"
           }}
         >
-          <Link to="/">
-            <Button>Misc</Button>
-          </Link>
-          <Link to="/tree">
-            <Button>tree</Button>
-          </Link>
-          <Link to="/about">
-            <Button>About</Button>
-          </Link>
-          <Link to="/stack">
-            <Button>Stack</Button>
-          </Link>
+          <Link to="/"></Link>
         </Segment>
         <Segment
           color="white"
@@ -46,7 +40,19 @@ const App: React.FC<any> = (prop: any) => {
         >
           <Switch>
             <Route exact path="/">
-              <Button>Misc</Button>
+              <Flex column padding="padding.medium" gap="gap.smaller">
+                {results.output.map((l: any) => {
+                  return <Button color="brand">{l}</Button>;
+                })}
+                <Button
+                  primary
+                  onClick={() => {
+                    refreshResults({ output: logResults() });
+                  }}
+                >
+                  Refrsh Results
+                </Button>
+              </Flex>
             </Route>
             <Route path="/tree">
               <Button>tree</Button>
@@ -59,9 +65,9 @@ const App: React.FC<any> = (prop: any) => {
             gridColumn: "span 2"
           }}
         >
-          <div>
+          <Flex column padding="padding.medium" gap="gap.smaller">
             {lines.output.map((l: any) => {
-              return <div>{l}</div>;
+              return <Label>{l}</Label>;
             })}
             <Button
               primary
@@ -71,7 +77,7 @@ const App: React.FC<any> = (prop: any) => {
             >
               Refrsh log
             </Button>
-          </div>
+          </Flex>
         </Segment>
         <Segment
           color="brand"
