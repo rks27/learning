@@ -4,7 +4,7 @@ import { Button, Grid, Segment, Label, Flex } from "@fluentui/react";
 import logLines from "./examples/log";
 import { logResults } from "./examples/log";
 // import main from "./examples/bracket";
-import main from "./examples/adhoc";
+import main from "./examples/fib";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 main();
@@ -42,7 +42,7 @@ const App: React.FC<any> = (prop: any) => {
             <Route exact path="/">
               <Flex column padding="padding.medium" gap="gap.smaller">
                 {results.output.map((l: any) => {
-                  return <Button color="brand">{l}</Button>;
+                  return <Button>{l}</Button>;
                 })}
                 <Button
                   primary
@@ -67,7 +67,7 @@ const App: React.FC<any> = (prop: any) => {
         >
           <Flex column padding="padding.medium" gap="gap.smaller">
             {lines.output.map((l: any) => {
-              return <Label>{l}</Label>;
+              return <Label color="gray">{l}</Label>;
             })}
             <Button
               primary
