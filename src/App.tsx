@@ -50,7 +50,7 @@ const App: React.FC<any> = (prop: any) => {
                     refreshResults({ output: logResults() });
                   }}
                 >
-                  Refrsh Results
+                  Refrsh Results1
                 </Button>
               </Flex>
             </Route>
